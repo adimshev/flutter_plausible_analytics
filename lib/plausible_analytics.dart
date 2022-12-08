@@ -32,30 +32,30 @@ class Plausible {
       // Remove trailing slash '/'
       serverUrl = serverUrl.substring(0, lastCharIndex);
     }
-    page = "app://localhost/" + page;
-    referrer = "app://localhost/" + referrer;
+    // page = "app://localhost/" + page;
+    // referrer = "app://localhost/" + referrer;
 
     // Get and set device infos
-    String version = Platform.operatingSystemVersion.replaceAll('"', '');
+    // String version = Platform.operatingSystemVersion.replaceAll('"', '');
 
-    if (userAgent == "") {
-      userAgent = "Mozilla/5.0 ($version; rv:53.0) Gecko/20100101 Chrome/53.0";
-    }
+    // if (userAgent == "") {
+    //   userAgent = "Mozilla/5.0 ($version; rv:53.0) Gecko/20100101 Chrome/53.0";
+    // }
 
     // Http Post request see https://plausible.io/docs/events-api
     try {
       HttpClient client = HttpClient();
       HttpClientRequest request =
           await client.postUrl(Uri.parse(serverUrl + '/api/event'));
-      request.headers.set('User-Agent', userAgent);
+      // request.headers.set('User-Agent', userAgent);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
-      request.headers.set('X-Forwarded-For', '127.0.0.1');
+      // request.headers.set('X-Forwarded-For', '127.0.0.1');
       Object body = {
         "domain": domain,
         "name": name,
         "url": page,
-        "referrer": referrer,
-        "screen_width": screenWidth,
+        // "referrer": referrer,
+        // "screen_width": screenWidth,
         "props": props,
       };
       request.write(json.encode(body));
